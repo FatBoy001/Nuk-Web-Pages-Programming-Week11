@@ -1,16 +1,18 @@
 <?php
 require("LinkToSQL.php");
-$title=$_POST["title"];
-$SQLTable="SELECT * FROM email";
-$message=$_POST["message"];
-$message=nl2br($message);
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
+if(isset($_POST["title"])){
+$title=$_POST["title"];
+$SQLTable="SELECT * FROM email";
+$message=$_POST["message"];
+$message=nl2br($message);
+
+
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
@@ -48,6 +50,7 @@ if($title!=null){
         }
     }
 }
-
-
+}else{
+    header("Location:sendMailMassage.php");
+}
 ?>
